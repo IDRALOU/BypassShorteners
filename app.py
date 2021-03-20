@@ -4,7 +4,7 @@ import bypass_functions
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-linkvertiseSites = ["linkvertise.com", "link-to.net", "up-to-down.net", "direct-link.net", "file-link.net"]
+#linkvertiseSites = ["linkvertise.com", "link-to.net", "up-to-down.net", "direct-link.net", "file-link.net"]
 
 @app.route("/")
 def home():
@@ -21,10 +21,10 @@ def bypass():
     if not "https://" in url:
         if not "http://" in url:
             return "URL invalide."
-    for linkvertiseSite in linkvertiseSites:
-        if linkvertiseSite in url:
-            return bypass_functions.bypassLinkvertise(url)
-            break
+    #for linkvertiseSite in linkvertiseSites:
+        #if linkvertiseSite in url:
+            #return bypass_functions.bypassLinkvertise(url)
+            #break
     if "rekonise.com" in url:
         return bypass_functions.bypassRekonise(url)
     elif "sub2unlock.com" in url:
