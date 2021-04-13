@@ -45,6 +45,15 @@ def bypass():
     else:
         return "URL invalide."
     
+@app.route("/api/unshort", methods=["GET"])
+def unshort():
+    url = request.args.get("url")
+    if url == None:
+        return "Une URL doit être spécifiée."
+    if not "https://" in url:
+        return "URL invalide."
+    return bypass_functions.unshortenerLink(url)
+    
 
 if __name__ == "__main__":
     app.run()
