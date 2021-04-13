@@ -44,7 +44,7 @@ headers = {"X-Requested-With": "XMLHttpRequest", "User-Agent": "Mozilla/5.0 (iPh
     #o = str.encode(o)
     #o = base64.b64encode(o)
     #o = o.decode('utf-8')
-    #r2 = requests.get(f"https://publisher.linkvertise.com/api/v1/redirect/link/{url}/target?serial={o}", headers=headers)
+    #r2 = requests.post(f"https://publisher.linkvertise.com/api/v1/redirect/link/{url}/target?serial={o}", headers=headers)
     #url_final = r2.json()["data"]["target"]
     #url_final = urllib.parse.unquote(url_final)
     #return str(url_final)
