@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template
 import os
 import bypass_functions
 
@@ -8,10 +8,7 @@ app.secret_key = os.urandom(24)
 
 @app.route("/")
 def home():
-    message_welcome = {
-        "message": "Bienvenue sur Bypass Shorteners (Fait par IDRALOU#6966)"
-    }
-    return jsonify(message_welcome)
+    return render_template("index.html")
   
 @app.route("/api/bypass", methods=["GET"])
 def bypass():
@@ -21,10 +18,10 @@ def bypass():
     if not "https://" in url:
         if not "http://" in url:
             return "URL invalide."
-    #for linkvertiseSite in linkvertiseSites:
-        #if linkvertiseSite in url:
-            #return bypass_functions.bypassLinkvertise(url)
-            #break
+    for linkvertiseSite in linkvertiseSites:
+        if linkvertiseSite in url:
+            return bypass_functions.bypassLinkvertise(url)
+            break
     if "rekonise.com" in url:
         return bypass_functions.bypassRekonise(url)
     elif "sub2unlock.com" in url:
@@ -47,6 +44,15 @@ def bypass():
         return bypass_functions.bypassShortUrlLink(url)
     else:
         return "URL invalide."
+
+@app.route("/api/unshort", methods=["GET"])
+def unshort():
+    url = request.args.get("url")
+    if url == None:
+        return "Une URL doit être spécifiée."
+    if not "https://" in url:
+        return "URL invalide."
+    return bypass_functions.unshortenerLink(url)
     
 
 if __name__ == "__main__":
