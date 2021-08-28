@@ -8,46 +8,47 @@ import math
 
 headers = {"X-Requested-With": "XMLHttpRequest", "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Mobile/15E148 Safari/604.1"}
 
-# le bypass linkvertise ne fonctionne pas sur heroku (je ne sais pas si sur d'autres hébergeurs ça fonctionne mais je ne crois pas que ça fonctionnerait)
-# par contre en local ça fonctionne
-#def bypassLinkvertise(url):
-    #if "linkvertise.com" in url:
-        #if "?o=sharing" in url:
-            #url = url[24:-10]
-        #else:
-            #url = url[24:]
-    #elif "link-to.net" in url:
-        #if "?o=sharing" in url:
-            #url = url[20:-10]
-        #else:
-            #url = url[20:]
-    #elif "up-to-down.net" in url:
-        #if "?o=sharing" in url:
-            #url = url[23:-10]
-        #else:
-            #url = url[23:]
-    #elif "direct-link.net" in url:
-        #if "?o=sharing" in url:
-            #url = url[24:-10]
-        #else:
-            #url = url[24:]
-    #elif "file-link.net" in url:
-        #if "?o=sharing" in url:
-            #url = url[22:-10]
-        #else:
-            #url = url[22:]
-    #if url[-1:] == "/":
-        #url = url[:-1]
-    #r1 = requests.get(f"https://publisher.linkvertise.com/api/v1/redirect/link/static/{url}", headers=headers)
-    #timestamp = int(time.time())
-    #o = """{"timestamp":""" + str(timestamp) + ""","random":"6548307","link_id":""" + str(r1.json()["data"]["link"]["id"]) + "}"
-    #o = str.encode(o)
-    #o = base64.b64encode(o)
-    #o = o.decode('utf-8')
-    #r2 = requests.post(f"https://publisher.linkvertise.com/api/v1/redirect/link/{url}/target?serial={o}", headers=headers)
-    #url_final = r2.json()["data"]["target"]
-    #url_final = urllib.parse.unquote(url_final)
-    #return str(url_final)
+# linkvertise a un système de détection pour savoir si l'IP qui fait une requête vient d'un serveur ou autre
+# donc soit vous devrez surement utiliser un proxy
+# en local ça fonctionne
+# def bypassLinkvertise(url):
+#     if "linkvertise.com" in url:
+#         if "?o=sharing" in url:
+#             url = url[24:-10]
+#         else:
+#             url = url[24:]
+#     elif "link-to.net" in url:
+#         if "?o=sharing" in url:
+#             url = url[20:-10]
+#         else:
+#             url = url[20:]
+#     elif "up-to-down.net" in url:
+#         if "?o=sharing" in url:
+#             url = url[23:-10]
+#         else:
+#             url = url[23:]
+#     elif "direct-link.net" in url:
+#         if "?o=sharing" in url:
+#             url = url[24:-10]
+#         else:
+#             url = url[24:]
+#     elif "file-link.net" in url:
+#         if "?o=sharing" in url:
+#             url = url[22:-10]
+#         else:
+#             url = url[22:]
+#     if url[-1:] == "/":
+#         url = url[:-1]
+#     r1 = requests.get(f"https://publisher.linkvertise.com/api/v1/redirect/link/static/{url}", headers=headers)
+#     timestamp = int(time.time())
+#     o = """{"timestamp":""" + str(timestamp) + ""","random":"6548307","link_id":""" + str(r1.json()["data"]["link"]["id"]) + "}"
+#     o = str.encode(o)
+#     o = base64.b64encode(o)
+#     o = o.decode('utf-8')
+#     r2 = requests.post(f"https://publisher.linkvertise.com/api/v1/redirect/link/{url}/target?serial={o}", headers=headers)
+#     url_final = r2.json()["data"]["target"]
+#     url_final = urllib.parse.unquote(url_final)
+#     return str(url_final)
 
 def bypassRekonise(url):
     url = url[21:]
