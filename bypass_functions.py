@@ -8,8 +8,7 @@ import math
 
 headers = {"X-Requested-With": "XMLHttpRequest", "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Mobile/15E148 Safari/604.1"}
 
-# linkvertise a un système de détection pour savoir si l'IP qui fait la requête vient d'un serveur ou autre
-# en local ça fonctionne
+# le bypass linkvertise ne marche plus
 # def bypassLinkvertise(url):
 #     if "linkvertise.com" in url:
 #         if "?o=sharing" in url:
