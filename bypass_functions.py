@@ -8,7 +8,7 @@ import math
 
 headers = {"X-Requested-With": "XMLHttpRequest", "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Mobile/15E148 Safari/604.1"}
 
-# le bypass linkvertise remarche
+
 def bypassLinkvertise(url):
     url = url.replace("?o=sharing", "")
     url_split = url.split("/")
