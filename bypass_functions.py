@@ -8,45 +8,35 @@ import math
 
 headers = {"X-Requested-With": "XMLHttpRequest", "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Mobile/15E148 Safari/604.1"}
 
-# le bypass linkvertise ne marche plus
-# def bypassLinkvertise(url):
-#     if "linkvertise.com" in url:
-#         if "?o=sharing" in url:
-#             url = url[24:-10]
-#         else:
-#             url = url[24:]
-#     elif "link-to.net" in url:
-#         if "?o=sharing" in url:
-#             url = url[20:-10]
-#         else:
-#             url = url[20:]
-#     elif "up-to-down.net" in url:
-#         if "?o=sharing" in url:
-#             url = url[23:-10]
-#         else:
-#             url = url[23:]
-#     elif "direct-link.net" in url:
-#         if "?o=sharing" in url:
-#             url = url[24:-10]
-#         else:
-#             url = url[24:]
-#     elif "file-link.net" in url:
-#         if "?o=sharing" in url:
-#             url = url[22:-10]
-#         else:
-#             url = url[22:]
-#     if url[-1:] == "/":
-#         url = url[:-1]
-#     r1 = requests.get(f"https://publisher.linkvertise.com/api/v1/redirect/link/static/{url}", headers=headers)
-#     timestamp = int(time.time())
-#     o = """{"timestamp":""" + str(timestamp) + ""","random":"6548307","link_id":""" + str(r1.json()["data"]["link"]["id"]) + "}"
-#     o = str.encode(o)
-#     o = base64.b64encode(o)
-#     o = o.decode('utf-8')
-#     r2 = requests.post(f"https://publisher.linkvertise.com/api/v1/redirect/link/{url}/target?serial={o}", headers=headers)
-#     url_final = r2.json()["data"]["target"]
-#     url_final = urllib.parse.unquote(url_final)
-#     return str(url_final)
+# le bypass linkvertise remarche
+def bypassLinkvertise(url):
+    url = url.replace("?o=sharing", "")
+    url_split = url.split("/")
+    url = url_split[3] + "/" + url_split[4]
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0", 
+        "Accept": "application/json", 
+        "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3", 
+        "Accept-Encoding": "gzip, deflate, br", 
+        "referer": "https://linkvertise.com/", 
+        "Content-Type": "application/json", 
+        "origin": "https://linkvertise.com/", 
+        "sec-fetch-dest": "empty", 
+        "sec-fetch-mode": "cors", 
+        "sec-fetch-site": "same-site", 
+        "cache-control": "max-age=0", 
+        "te": "trailers"
+    }
+    r1 = requests.get(f"https://publisher.linkvertise.com/api/v1/redirect/link/static/{url}", headers=headers)
+    timestamp = int(time.time() * 1000)
+    o = """{"timestamp":""" + str(timestamp) + ""","random":"6548307","link_id":""" + str(r1.json()["data"]["link"]["id"]) + "}"
+    o = str.encode(o)
+    o = base64.b64encode(o)
+    o = o.decode('utf-8')
+    r2 = requests.post(f"https://publisher.linkvertise.com/api/v1/redirect/link/{url}/target", headers=headers, json={"serial": o})
+    url_final = r2.json()["data"]["target"]
+    url_final = urllib.parse.unquote(url_final)
+    return str(url_final)
 
 def bypassRekonise(url):
     url = url[21:]
