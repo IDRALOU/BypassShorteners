@@ -1,9 +1,7 @@
 from flask import Flask, request, render_template
-import os
 import bypass_functions
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
 linkvertiseSites = ["linkvertise.com", "link-to.net", "up-to-down.net", "direct-link.net", "file-link.net"]
 
 @app.route("/")
